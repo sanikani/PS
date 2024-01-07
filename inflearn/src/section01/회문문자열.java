@@ -23,7 +23,7 @@ public class 회문문자열 {
         str = str.toLowerCase();
         int lt=0, rt=str.length()-1;
         char[] arr = str.toCharArray();
-        for (int i=0; i<str.length();i++) {
+        while(lt<rt) {
             if (arr[lt] == arr[rt]) {
                 lt++;
                 rt--;
