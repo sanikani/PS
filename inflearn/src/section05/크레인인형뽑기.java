@@ -35,21 +35,20 @@ public class 크레인인형뽑기 {
         for (int i = 0; i < board.length; i++) {
             Stack<Integer> stack = new Stack<>();
             for (int j = board.length - 1; j >= 0; j--) {
-                if(board[j][i]==0) break;
+                if(board[j][i]==0) continue;
                 stack.push(board[j][i]);
             }
             list.add(stack);
         }
         for (int move : moves) {
             Stack<Integer> stack = list.get(move - 1);
-            if (stack.empty()) continue;
-            if (!bucket.empty()) {
-                Integer peek = bucket.peek();
-                if (stack.peek().equals(peek)) {
+            if (stack.isEmpty()) continue;
+            if (!bucket.isEmpty()) {
+                int peek = bucket.peek();
+                if (stack.peek()==peek) {
                     bucket.pop();
                     stack.pop();
-                    cnt++;
-                    cnt++;
+                    cnt += 2;
                 } else {
                     bucket.push(stack.pop());
                 }
