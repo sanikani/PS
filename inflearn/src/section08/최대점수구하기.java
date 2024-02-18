@@ -1,7 +1,5 @@
-package section07;
+package section08;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class 최대점수구하기 {
