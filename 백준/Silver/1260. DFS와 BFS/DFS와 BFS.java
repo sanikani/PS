@@ -40,20 +40,17 @@ public class Main{
     public static void BFS(int v){
         Queue<Integer> Q = new LinkedList<>();
         Q.offer(v);
+        ch[v] = 1;
+        System.out.print(v+" ");
         while (!Q.isEmpty()) {
-            int len = Q.size();
-            for (int i = 0; i < len; i++) {
-                int c = Q.poll();
-                if (ch[c] == 0) {
-                    ch[c] = 1;
-                    System.out.print(c+" ");
-                    for (int j = 1; j <= n; j++) {
-                        if (ch[j] == 0 && arr[c][j] == 1) {
-                            Q.offer(j);
-                        }
+            int c = Q.poll();
+                for (int i = 1; i <= n; i++) {
+                    if (ch[i] == 0 && arr[c][i] == 1) {
+                        ch[i] = 1;
+                        System.out.print(i+" ");
+                        Q.offer(i);
                     }
                 }
-            }
         }
     }
 }
