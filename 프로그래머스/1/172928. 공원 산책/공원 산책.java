@@ -16,9 +16,7 @@ class Solution {
         }
         for(int[] arr : map){
             for(int a : arr){
-                System.out.print(a + " ");
             }
-            System.out.println();
         }
         Map<String, int[]> r = new HashMap<>();
         r.put("E", new int[] {0,1});
@@ -36,28 +34,22 @@ class Solution {
             if(nx != answer[0]){
                 if(nx<0 || nx>=h) {
                     move = false;
-                    System.out.println("이동 실패");
                     continue;
                 }
                 for(int j=Math.min(answer[0],nx);j<=Math.max(answer[0],nx);j++){
-                    System.out.println("좌표 확인 " + j + ", " + answer[1] + "=" + map[j][answer[1]]);
                     if(map[j][answer[1]]==1) {
                         move = false;
-                        System.out.println("이동 실패");
                         break;
                     }
                 }
             }else{
                 if(ny<0 || ny>=w){
                     move = false;
-                    System.out.println("이동 실패");
                     continue;
                 } 
                 for(int j=Math.min(answer[1],ny);j<=Math.max(answer[1],ny);j++){
-                    System.out.println("좌표 확인 " + answer[0] + ", " + j + "=" + map[j][answer[1]]);
                     if(map[answer[0]][j]==1) {
                         move = false;
-                        System.out.println("이동 실패");
                         break;
                     }
                 }
@@ -65,7 +57,6 @@ class Solution {
             if(move){
                     answer[0] = nx;
                     answer[1] = ny;
-                    System.out.println("이동 완료 " + answer[0] + "," + answer[1]);
                 }
         }
         return answer;
