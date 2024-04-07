@@ -4,11 +4,10 @@ class Solution {
         
         String answer = "";
         if(s.length()%2==1){
-            answer += s.charAt(mid);
+            answer = s.substring(mid,mid+1);
             return answer;
         }
-        answer+=s.charAt(mid-1);
-        answer += s.charAt(mid);
+        answer = s.substring(mid-1,mid+1);
         return answer;
     }
 }
