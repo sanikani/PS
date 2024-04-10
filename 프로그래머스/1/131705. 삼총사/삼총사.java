@@ -4,19 +4,19 @@ class Solution {
     static int[] ch;
     public int solution(int[] number) {
         ch = new int[number.length];
-        DFS(number, 0);
-        return answer/6;
+        DFS(number,0, 0);
+        return answer;
     }
-    public void DFS(int[] number, int l){
+    public void DFS(int[] number,int s, int l){
         if(l==3){
             if(sum==0) answer++;
         }
         else{
-            for(int i=0;i<number.length;i++){
+            for(int i=s;i<number.length;i++){
                 if(ch[i]==0){
                     ch[i]=1;
                     sum+=number[i];
-                    DFS(number,l+1);
+                    DFS(number,i,l+1);
                     ch[i]=0;
                     sum-=number[i];
                 }
