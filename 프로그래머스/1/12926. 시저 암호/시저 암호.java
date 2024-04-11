@@ -5,12 +5,9 @@ class Solution {
         for(int i=0;i<arr.length;i++){
             char x = arr[i];
             if(x>=97 && x<=122){
-                int k = ((x+n)-97)%26+97;
-                arr[i] = (char)k;
-                System.out.println(k);
+                arr[i] = (char)(((x+n)-97)%26+97);
             }else if(x>=65&&x<=90){
-                int z = ((x+n)-65)%26+65;
-                arr[i] = (char)z;
+                arr[i] = (char)(((x+n)-65)%26+65);
             }
         }
         return new String(arr);
