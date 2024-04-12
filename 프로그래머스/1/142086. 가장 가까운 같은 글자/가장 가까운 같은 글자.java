@@ -9,7 +9,7 @@ class Solution {
                 answer[i] = -1;
             }else{
                 answer[i] = i - map.get(s.charAt(i));
-                map.put(s.charAt(i),Math.max(map.get(s.charAt(i)),i));
+                map.put(s.charAt(i),i);
             }
         }
         
