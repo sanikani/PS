@@ -7,9 +7,6 @@ class Solution {
                 sb.append(i);
             }
         }
-        String answer = sb.toString();
-        answer += "0";
-        answer += sb.reverse().toString();
-        return answer;
+        return sb.toString() + "0" + sb.reverse().toString();
     }
 }
