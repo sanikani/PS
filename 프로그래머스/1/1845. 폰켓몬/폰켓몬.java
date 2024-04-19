@@ -1,12 +1,10 @@
 import java.util.*;
 class Solution {
     public int solution(int[] nums) {
-        Map<Integer,Integer> map = new HashMap<>();
+        HashSet<Integer> set = new HashSet<>();
         for(int x : nums){
-            map.put(x,map.getOrDefault(x,0)+1);
+            set.add(x);
         }
-        int size = nums.length/2;
-        if(map.size()>size) return size;
-        else return map.size();
+        return Math.min(set.size(),nums.length/2);
     }
 }
