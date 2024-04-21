@@ -1,6 +1,6 @@
 # [level 2] 중복 제거하기 - 59408 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/59408) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/59408#) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@ Empty
 
 ### 제출 일자
 
-2024년 04월 22일 00:34:37
+2024년 04월 22일 00:36:35
 
 ### 문제 설명
 
