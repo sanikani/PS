@@ -48,13 +48,10 @@ class Solution {
         }
         
         @Override
-        public int compareTo(Rate rate){
-            if(this.fail == rate.fail){
-                return this.stage-rate.stage;
-            }
-            
+        public int compareTo(Rate rate){            
             if(this.fail>rate.fail) return -1;
-            else return 1;
+            if(this.fail<rate.fail) return 1;
+            return 0;
         }
     }
 }
