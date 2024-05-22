@@ -21,7 +21,7 @@ class Solution {
             int y = yMap.get(i);
             int k = 0;
             while(k<x && k<y){
-                sb.append(Integer.valueOf(i));
+                sb.append(i);
                 k++;
             }
         }
