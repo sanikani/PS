@@ -1,7 +1,7 @@
 import java.util.*;
 class Solution {
     public String solution(String s, String skip, int index) {
-        String answer = "";
+        StringBuilder sb = new StringBuilder();
         List<Integer> idx = new ArrayList<>();
         
         for(int i=0;i<skip.length();i++){
@@ -17,8 +17,8 @@ class Solution {
                 if(k>25) k = 0;
                 if(idx.contains(k)) a++;
             }
-            answer += (char)(k+'a');
+            sb.append((char)(k+'a'));
         }
-        return answer;
+        return sb.toString();
     }
 }
