@@ -15,13 +15,12 @@ class Solution {
             for(String s : targets[i].split("")){
                 int c = map.getOrDefault(s,0);
                 if(c == 0){
-                    cnt = 0;
+                    cnt = -1;
                     break;
                 }
                 cnt += c;
             }
-            if(cnt == 0) answer[i] = -1;
-            else answer[i] = cnt;
+            answer[i] = cnt;
         }
         return answer;
     }
