@@ -4,21 +4,11 @@ class Solution {
         int cnt = 1;
         int i = 1;
         while(cnt<=n){
-            String s = String.valueOf(i);
-            if(i%3!=0&&!isContainThree(s)){
+            if(i%3!=0&&!String.valueOf(i).contains("3")){
                 cnt++;
             }
             i++;
         }
         return i-1;
-    }
-    
-    public boolean isContainThree(String s){
-        for(String st : s.split("")){
-            if(st.equals("3")){
-                return true;
-            }
-        }
-        return false;
     }
 }
