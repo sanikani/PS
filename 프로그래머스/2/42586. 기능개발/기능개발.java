@@ -14,8 +14,6 @@ class Solution {
         
         int i = queue.poll();
         int count = 1;
-        //맨앞꺼내고 다음값보다 크면 count++, q.poll()
-        //작으면 answer.add(count), i = q.poll();
         while(true){
             if(queue.isEmpty()){
                 answer.add(count);
