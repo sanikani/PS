@@ -11,11 +11,7 @@ class Solution {
         
         int i = queue.poll();
         int count = 1;
-        while(true){
-            if(queue.isEmpty()){
-                answer.add(count);
-                break;
-            }
+        while(!queue.isEmpty()){
             if(queue.peek()>i){
                 answer.add(count);
                 count = 1;
@@ -25,6 +21,7 @@ class Solution {
                 count++;
             }
         }
+        answer.add(count);
         return answer.stream().mapToInt(Integer::intValue).toArray();
     }
 }
