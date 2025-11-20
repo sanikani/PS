@@ -8,8 +8,8 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
-		int[] length = new int[N-1];
-		int[] price = new int[N];
+		long[] length = new long[N-1];
+		long[] price = new long[N];
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		for(int i=0;i<N-1; i++) {
 			length[i] = Integer.parseInt(st.nextToken());
@@ -20,10 +20,10 @@ public class Main {
 			price[i] = Integer.parseInt(st.nextToken());
 		}
 		
-		int totalPrice = 0;
+		long totalPrice = 0;
 		for(int i=0; i<N-1; i++) {
 			totalPrice += price[i]*length[i];
-			int curPrice = price[i];
+			long curPrice = price[i];
 			int index = i+1;
 			
 			while(index<N-1) {
