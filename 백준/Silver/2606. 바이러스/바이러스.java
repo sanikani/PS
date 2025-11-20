@@ -1,43 +1,51 @@
-import java.util.*;
-import java.io.*;
-public class Main{
-    static int[][] arr;
-    static int[] ch;
-    static int n,m;
-    public static void main(String[] args) throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        n = Integer.parseInt(br.readLine());
-        m = Integer.parseInt(br.readLine());
-        ch = new int[n+1];
-        arr = new int[n+1][n+1];
-        for(int i=0;i<m;i++){
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            arr[a][b] = 1;
-            arr[b][a] = 1;
-        }
-        System.out.print(BFS(1));
-    }
-    
-    public static int BFS(int s){
-        Queue<Integer> Q = new LinkedList<>();
-        Q.offer(s);
-        ch[s] = 1;
-        int cnt = 0;
-        int len = Q.size();
-        while(!Q.isEmpty()){
-            for(int i=0;i<len;i++){
-                int c = Q.poll();
-                for(int j=1;j<=n;j++){
-                    if(arr[c][j]==1 && ch[j]==0){
-                        ch[j] = 1;
-                        Q.offer(j);
-                        cnt++;
-                    }
-                }
-            }
-        }
-        return cnt;
-    }
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+public class Main {
+	static List<List<Integer>> nodes;
+	static boolean[] visited;
+	static int result;
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int n = Integer.parseInt(br.readLine());
+		int k = Integer.parseInt(br.readLine());
+		nodes = new ArrayList<List<Integer>>();
+		visited = new boolean[n+1];
+		result = 0;
+		for(int i=0; i<=n; i++) {
+			nodes.add(new ArrayList<>());
+		}
+		for(int i=0; i<k; i++) {
+			StringTokenizer stringTokenizer = new StringTokenizer(br.readLine());
+			int x = Integer.parseInt(stringTokenizer.nextToken());
+			int y = Integer.parseInt(stringTokenizer.nextToken());
+			nodes.get(x).add(y);
+			nodes.get(y).add(x);
+		}
+		visited[1] = true;
+		dfs(1);
+		
+		System.out.println(result);
+	}
+
+	private static void dfs(int node) {
+		if (nodes.get(node).size()==0) {
+			return;
+		}else {
+			for(int n : nodes.get(node)) {
+				if (visited[n]) {
+					continue;
+				}
+				visited[n] = true;
+				result++;
+				dfs(n);
+			}
+		}
+		
+	}
 }
