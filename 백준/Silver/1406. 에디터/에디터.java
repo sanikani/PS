@@ -7,11 +7,11 @@ public class Main{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String s = br.readLine();
         int M = Integer.parseInt(br.readLine());
-        System.out.println(solution(s, M, br));
+        solution(s, M, br);
         
     }
     
-    private static String solution(String s, int M, BufferedReader br)  throws IOException{
+    private static void solution(String s, int M, BufferedReader br)  throws IOException{
         List<Character> str = new LinkedList<>();
         for(int i=0; i<s.length(); i++){
             str.add(s.charAt(i));
@@ -39,6 +39,12 @@ public class Main{
                 cursor.add(text);
             }
         }
-        return str.stream().map(String::valueOf).collect(Collectors.joining());
+        
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        for(char c : str){
+            bw.write(c);
+        }
+        
+        bw.flush();
     }
 }
