@@ -19,9 +19,7 @@ public class Main{
                     sb.append(".");
                 }else{
                     int aCount = cnt/4;
-                    for(int j=0; j<aCount; j++){
-                        sb.append("AAAA");
-                    }
+                    sb.append("AAAA".repeat(cnt / 4));
                     if(cnt%4!=0){
                         sb.append("BB");
                     }
@@ -37,9 +35,7 @@ public class Main{
                     return;
             }else{
                 int aCount = cnt/4;
-                for(int j=0; j<aCount; j++){
-                    sb.append("AAAA");
-                }
+                sb.append("AAAA".repeat(cnt / 4));
                 if(cnt%4!=0){
                     sb.append("BB");
                 }
