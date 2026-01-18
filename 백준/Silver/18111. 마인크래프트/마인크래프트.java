@@ -21,14 +21,9 @@ public class Main{
         
         for(int i=0; i<=256; i++){
             int result = flatten(N,M,B,map,i);
-            if(result < min){
+            if(result <= min && i >= height){
                 min = result;
                 height = i;
-            }else if(result == min){
-                if(i > height){
-                    min = result;
-                    height = i;
-                }
             }
         }
         
