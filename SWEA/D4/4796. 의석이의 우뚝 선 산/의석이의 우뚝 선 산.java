@@ -23,19 +23,16 @@ public class Solution {
 		int result = 0;
 		
 		for(int i = 1; i < n - 1; i++) {
-			int now = heigts[i];
-			int left = i - 1;
-			int right = i + 1;
-			if(heigts[left] > now || heigts[right] > now) continue;
-			int lCnt = 1;
-			int rCnt = 1;
+            if (!(heigts[i-1] < heigts[i] && heigts[i] > heigts[i+1])) continue;
+			int lCnt = 0;
+			int rCnt = 0;
 			//왼쪽 가면서 확인
-			for(int j = left; j >= 1; j--) {
+			for(int j = i; j >= 1; j--) {
 				if(heigts[j] < heigts[j - 1]) break;
 				lCnt++;
 			}
 			//오른쪽 가면서 확인
-			for(int j = right; j < n - 1; j++) {
+			for(int j = i; j < n - 1; j++) {
 				if(heigts[j] < heigts[j + 1]) break;
 				rCnt++;
 			}
