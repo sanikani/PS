@@ -33,11 +33,13 @@ public class Solution {
 	}
 	private static int solution() {
 		max = -1;
-		for(int r = 0; r < N; r++) {
-			for(int c = 0; c < N; c++) {
-				for(int i = 1; i < N - 1; i++) {
-					for(int j = 1; j < N - 1; j++) {
-						if(i == N - 2 && j == N - 2) break;
+		for(int r = 0; r <= N - 3; r++) {
+			for(int c = 1; c <= N - 2 ; c++) {
+				for(int i = 1; i < N; i++) {
+					for(int j = 1; j < N; j++) {
+						if(r + i + j >= N) continue;
+						if(c + i >= N) continue;
+						if(c - j < 0) continue;
 						int result = check(r, c, i, j);
 						max = Math.max(max, result);
 					}
