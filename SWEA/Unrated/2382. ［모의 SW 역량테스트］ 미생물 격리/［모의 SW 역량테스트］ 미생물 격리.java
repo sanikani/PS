@@ -74,7 +74,8 @@ public class Solution {
 					}
 					groups.add(new Group(entry.getKey(), sum, dir));
 				}else {
-					groups.add(entry.getValue().get(0));
+					Group g = entry.getValue().get(0);
+					if(g.amount != 0) groups.add(g);
 				}
 			}
 		}
