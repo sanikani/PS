@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -45,6 +44,7 @@ public class Solution {
 		for(int h = 0; h < m; h++) {
 			Map<Location, List<Group>> map = new HashMap<>();
 			for(Group g : groups) {
+				if(g.amount == 0) continue;
 				int nr = g.location.r + dr[g.dir];
 				int nc = g.location.c + dc[g.dir];
 				if(nr <= 0 || nr >= n - 1 || nc <= 0 || nc >= n - 1) {
@@ -74,8 +74,7 @@ public class Solution {
 					}
 					groups.add(new Group(entry.getKey(), sum, dir));
 				}else {
-					Group g = entry.getValue().get(0);
-					if(g.amount != 0) groups.add(g);
+					groups.add(entry.getValue().get(0));
 				}
 			}
 		}
