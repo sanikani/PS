@@ -36,15 +36,15 @@ public class Main {
 			}
 		}
 		
-		islandNum = 1;
+		islandNum = 0;
 		checkIsland();
 		makeEdges();
 		Collections.sort(edges, (e1, e2) -> e1.w - e2.w);
-		--islandNum;
 		parents = new int[islandNum+1];
 		for(int i = 1; i <= islandNum; i++) parents[i] = i;
 		int cost = 0;
 		int cnt = 0;
+		
 		for (Edge edge : edges) {
 			if(find(edge.u) != find(edge.v)) {
 				union(edge.u, edge.v);
@@ -54,10 +54,12 @@ public class Main {
 			
 			if(cnt == islandNum - 1) break;
 		}
+		
 		if(cnt < islandNum - 1) {
 			System.out.println(-1);
 			return;
 		}
+		
 		System.out.println(cost);
 	}
 	
@@ -119,6 +121,7 @@ public class Main {
 	}
 
 	private static void changeIslandNum(int i, int j, boolean[][] visited) {
+		islandNum++;
 		Queue<int[]> q = new ArrayDeque<>();
 		visited[i][j] = true;
 		grid[i][j] = islandNum;
@@ -128,7 +131,6 @@ public class Main {
 			int[] cur = q.poll();
 			int r = cur[0];
 			int c = cur[1];
-
 			
 			for(int d = 0; d < 4; d++) {
 				int nr = r + dr[d];
@@ -142,7 +144,7 @@ public class Main {
 				q.offer(new int[] {nr, nc});
 			}
 		}
-		islandNum++;
+		
 	}
 
 	private static boolean notInRange(int r, int c, int nr, int nc) {
@@ -157,12 +159,5 @@ public class Main {
 			this.v = v;
 			this.w = w;
 		}
-
-		@Override
-		public String toString() {
-			return "Edge [u=" + u + ", v=" + v + ", w=" + w + "]";
-		}
-		
-		
 	}
 }
