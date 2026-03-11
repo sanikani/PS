@@ -9,7 +9,6 @@ public class Main {
 	static char[][] grid;
 	static int cnt;
 	static int[] dr = {-1, 0, 1};
-	static boolean[][] visited;
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -26,7 +25,6 @@ public class Main {
 	
 	private static int soltuion() {
 		cnt = 0;
-		visited = new boolean[R][C];
 		for(int i = 0; i < R; i++) {
 			if(dfs(i, 0)) cnt++;
 		}
@@ -35,7 +33,7 @@ public class Main {
 	}
 	
 	static boolean dfs(int r, int c) {
-		visited[r][c] = true;
+		grid[r][c] = 'x';
 		
 		if(c == C - 1) return true;
 		
@@ -44,7 +42,7 @@ public class Main {
 			int nc = c + 1;
 			
 			if(nr < 0 || nr >= R || nc >= C) continue;
-			if(visited[nr][nc] || grid[nr][nc] == 'x') continue;
+			if(grid[nr][nc] == 'x') continue;
 			
 			if(dfs(nr, nc)) return true;
 		}
