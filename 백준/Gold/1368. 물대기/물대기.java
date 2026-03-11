@@ -41,7 +41,6 @@ public class Main {
 			for(int j = 0; j < n; j++) {
 				if(i != j) {
 					nodes.get(i).add(new Node(j, weights[i][j]));
-					nodes.get(j).add(new Node(i, weights[j][i]));
 				}				
 			}
 		}
