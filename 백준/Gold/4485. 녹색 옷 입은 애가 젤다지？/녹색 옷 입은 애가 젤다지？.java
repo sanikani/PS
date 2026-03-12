@@ -76,7 +76,8 @@ public class Main {
 		
 		while(!pq.isEmpty()) {
 			Node cur = pq.poll();
-			
+            
+			if(cur.v == N*N) break;
 			if(cur.w > minDist[cur.v]) continue;
 			
 			for (Node node : graph.get(cur.v)) {
