@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
@@ -11,7 +9,6 @@ public class Main {
 	static int[][] grid;
 	static int[] dr = {-1, 0, 1, 0};
 	static int[] dc = {0, 1, 0, -1};
-	static List<List<Node>> graph;
 	static int[] minDist;
 	
 	static class Node{
@@ -32,11 +29,9 @@ public class Main {
 			
 			N = Integer.parseInt(br.readLine());
 			if(N == 0) break;
-			graph = new ArrayList<>();
 			minDist = new int[N * N + 1];
 			
 			for(int i = 0; i <= N*N; i++) {
-				graph.add(new ArrayList<>());
 				minDist[i] = Integer.MAX_VALUE;
 			}
 			
@@ -48,19 +43,6 @@ public class Main {
 				}
 			}
 			
-			for(int i = 0; i < N; i++) {
-				for(int j = 0; j < N; j++) {
-					int cur = i*N + j + 1;
-					for(int d = 0; d < 4; d++) {
-						int nr = i + dr[d];
-						int nc = j + dc[d];
-						if(nr < 0 || nr >= N || nc < 0 || nc >= N) continue;
-						int next = nr*N + nc + 1;
-						graph.get(cur).add(new Node(next, grid[nr][nc]));
-					}
-				}
-			}
-			
 			diijkstra();
 			
 			sb.append("Problem ").append(cnt++).append(": ").append(minDist[N*N] + grid[0][0]).append('\n');
@@ -69,20 +51,25 @@ public class Main {
 	}
 		
 		
-
 	private static void diijkstra() {
 		PriorityQueue<Node> pq = new PriorityQueue<>((n1, n2)-> Integer.compare(n1.w, n2.w));
 		pq.add(new Node(1, 0));
 		
 		while(!pq.isEmpty()) {
 			Node cur = pq.poll();
-            
+			int idx = cur.v - 1;
+			int r = idx/N;
+			int c = idx%N;
 			if(cur.v == N*N) break;
 			if(cur.w > minDist[cur.v]) continue;
 			
-			for (Node node : graph.get(cur.v)) {
-				int nextV = node.v;
-				int nextW = cur.w + node.w;
+			for(int d = 0; d < 4; d++) {
+				int nr = r + dr[d];
+				int nc = c + dc[d];
+				if(nr < 0 || nr >= N || nc < 0 || nc >= N) continue;
+				int nextV = nr*N + nc + 1;
+				int nextW = cur.w + grid[nr][nc];
+				
 				if(minDist[nextV] > nextW) {
 					minDist[nextV] = nextW;
 					pq.add(new Node(nextV, nextW));
