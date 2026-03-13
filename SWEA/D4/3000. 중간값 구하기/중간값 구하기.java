@@ -27,23 +27,15 @@ public class Solution {
 				st = new StringTokenizer(br.readLine());
 				int a = Integer.parseInt(st.nextToken());
 				int b = Integer.parseInt(st.nextToken());
-				if(maxHeap.peek() < a) {
-					minHeap.offer(a);
-				}else {
-					maxHeap.offer(a);
+				maxHeap.offer(a);
+				minHeap.offer(maxHeap.poll());
+				maxHeap.offer(b);
+				minHeap.offer(maxHeap.poll());
+
+				while(maxHeap.size() < minHeap.size() + 1){
+				    maxHeap.offer(minHeap.poll());
 				}
-				if(maxHeap.peek() < b) {
-					minHeap.offer(b);
-				}else {
-					maxHeap.offer(b);
-				}
-				while(minHeap.size() != maxHeap.size() - 1) {
-					if(minHeap.size() >= maxHeap.size()) {
-						maxHeap.offer(minHeap.poll());
-					}else {
-						minHeap.offer(maxHeap.poll());
-					}
-				}
+				
 				result = (result + maxHeap.peek()) % MOD;
 			}
 			
