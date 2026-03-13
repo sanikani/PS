@@ -14,11 +14,8 @@ public class Solution {
 	static int[] dr = {0, 1, 0, -1};
 	static int[] dc = {1, 0, -1, 0};
 	static int[] start = new int[2];
-//	static int[] devil = new int[2];
 	static List<int[]> devils;
 	static int[] end = new int[2];
-	static boolean[][] visited;
-	static boolean[][] devilVisited;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
@@ -29,8 +26,6 @@ public class Solution {
 			N = Integer.parseInt(st.nextToken());
 			M = Integer.parseInt(st.nextToken());
 			grid = new char[N][M];
-			visited = new boolean[N][M];
-			devilVisited = new boolean[N][M];
 			devils = new ArrayList<>();
 			for(int i = 0 ; i < N; i++) {
 				String s = br.readLine();
@@ -59,10 +54,8 @@ public class Solution {
 		Queue<int[]> devilQ = new ArrayDeque<>();
 		for (int[] d : devils) {
 			devilQ.offer(d);
-			devilVisited[d[0]][d[1]] = true;
 		}
 		q.offer(start);
-		visited[start[0]][start[1]] = true;
 		
 		int cnt = 1;
 		
@@ -74,10 +67,8 @@ public class Solution {
 					int nc = cur[1] + dc[d];
 					
 					if(nr < 0 || nr >= N || nc < 0 || nc >= M) continue;
-					if(devilVisited[nr][nc]) continue;
-					if(grid[nr][nc] == 'D' || grid[nr][nc] == 'X') continue;
+					if(grid[nr][nc] != '.') continue;
 					grid[nr][nc] = '*';
-					devilVisited[nr][nc] = true;
 					devilQ.offer(new int[] {nr, nc});
 				}
 			}
@@ -92,9 +83,8 @@ public class Solution {
 					
 					if(nr == end[0] && nc == end[1]) return String.valueOf(cnt);
 					if(nr < 0 || nr >= N || nc < 0 || nc >= M) continue;
-					if(visited[nr][nc]) continue;
-					if(grid[nr][nc] == 'X' || grid[nr][nc] == '*') continue;
-					visited[nr][nc] = true;
+					if(grid[nr][nc] != '.') continue;
+					grid[nr][nc] = 'S';
 					q.offer(new int[] {nr, nc});
 				}
 			}
