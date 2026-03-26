@@ -23,16 +23,13 @@ public class Main {
         boolean[] vis = new boolean[n + 1];
         int[] parent = new int[n + 1];
         Queue<Integer> q = new ArrayDeque<>();
-        for (int k : graph.get(1)) {
-            q.offer(k);
-            parent[k] = 1;
-        }
+        q.offer(1);
         vis[1] = true;
         while (!q.isEmpty()) {
             int cur = q.poll();
-            vis[cur] = true;
             for (int k : graph.get(cur)) {
                 if(vis[k]) continue;
+                vis[k] = true;
                 parent[k] = cur;
                 q.offer(k);
             }
