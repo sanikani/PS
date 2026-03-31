@@ -2,22 +2,42 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Main {
+	static int[] parent;
 	
 	static class Edge{
+		int u;
 		int v;
 		int w;
 		
-		Edge(int v, int w) {
+		Edge(int u, int v, int w) {
+			this.u = u;
 			this.v = v;
 			this.w = w;
 		}
 	}
+	
+	static int find(int x) {
+		if(parent[x] == x) return x;
+		return parent[x] = find(parent[x]);
+	}
+	
+	static boolean union(int a, int b) {
+		int pa = find(a);
+		int pb = find(b);
+		
+		if(pa == pb) return false;
+		parent[pb] = pa;
+		return true;
+	}
+    
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
@@ -25,36 +45,31 @@ public class Main {
 		int n = Integer.parseInt(st.nextToken());
 		int m = Integer.parseInt(st.nextToken());
 		
-		List<List<Edge>> graph = new ArrayList<>();
-		for(int i = 0; i <= n; i++) {
-			graph.add(new ArrayList<>());
+		parent = new int[n + 1];
+		for (int i = 1; i <= n; i++) {
+		    parent[i] = i;
 		}
+		Edge[] edges = new Edge[m];
 		for(int i = 0; i < m; i++) {
 			st = new StringTokenizer(br.readLine());
 			int u = Integer.parseInt(st.nextToken());
 			int v = Integer.parseInt(st.nextToken());
 			int w = Integer.parseInt(st.nextToken());
-			graph.get(u).add(new Edge(v, w));
-			graph.get(v).add(new Edge(u, w));
+			edges[i] = new Edge(u, v, w);
 		}
 		
-		PriorityQueue<Edge> pq = new PriorityQueue<>(Comparator.comparingInt(e -> e.w));
-		boolean[] vis = new boolean[n + 1];
+		Arrays.sort(edges, Comparator.comparingInt(e -> e.w));
 		
 		int total = 0;
 		int max = 0;
-		pq.offer(new Edge(1, 0));
-		while(!pq.isEmpty()) {
-			Edge cur = pq.poll();
-			
-			if(vis[cur.v]) continue;
-			
-			vis[cur.v] = true;
-			total += cur.w;
-			max = Math.max(max, cur.w);
-			for (Edge next : graph.get(cur.v)) {
-				if(vis[next.v]) continue;
-				pq.offer(next);
+		int count = 0;
+		
+		for(Edge edge : edges) {
+			if(union(edge.u, edge.v)) {
+				total += edge.w;
+				max = edge.w;
+				count++;
+				if(count == n - 1) break;
 			}
 		}
 		
