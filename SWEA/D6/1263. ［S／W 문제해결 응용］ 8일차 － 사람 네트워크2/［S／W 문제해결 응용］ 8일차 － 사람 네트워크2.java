@@ -38,7 +38,14 @@ public class Solution {
                 }
             }
 
-            int min = Arrays.stream(dist).mapToInt(d -> Arrays.stream(d).sum()).min().getAsInt();
+            int min = Integer.MAX_VALUE;
+            for (int i = 1; i <= n; i++) {
+                int sum = 0;
+                for (int j = 1; j <= n; j++) {
+                    sum += dist[i][j];
+                }
+                min = Math.min(min, sum);
+            }
             sb.append('#').append(tc).append(' ').append(min).append('\n');
         }
         System.out.println(sb);
