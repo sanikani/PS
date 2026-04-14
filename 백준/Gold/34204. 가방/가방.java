@@ -12,16 +12,16 @@ public class Main {
         int K = Integer.parseInt(st.nextToken());
         int C = Integer.parseInt(st.nextToken());
 
-        int[] arr = new int[N];
+        long[] arr = new long[N];
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
         Arrays.sort(arr);
-        int sum = 0;
+        long sum = 0;
         int idx = 0;
-        int thief = 0;
+        long thief = 0;
         int thiefIdx = K - 1;
         for (int i = 0; i < K; i++) {
             thief += arr[i];
