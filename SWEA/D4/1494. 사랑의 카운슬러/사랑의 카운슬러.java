@@ -34,13 +34,11 @@ public class Solution {
             return;
         }
 
-        if (plusCnt >= N / 2) {
-            dfs(xSum - arr[idx][0], ySum - arr[idx][1], idx + 1, plusCnt, minusCnt + 1);
-        } else if (minusCnt >= N / 2) {
+        if (plusCnt < N / 2) {
             dfs(xSum + arr[idx][0], ySum + arr[idx][1], idx + 1, plusCnt + 1, minusCnt);
-        } else {
+        }
+        if (minusCnt < N / 2) {
             dfs(xSum - arr[idx][0], ySum - arr[idx][1], idx + 1, plusCnt, minusCnt + 1);
-            dfs(xSum + arr[idx][0], ySum + arr[idx][1], idx + 1, plusCnt + 1, minusCnt);
         }
     }
 }
