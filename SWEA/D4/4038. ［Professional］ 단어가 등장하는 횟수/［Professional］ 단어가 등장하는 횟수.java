@@ -5,9 +5,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 public class Solution {
-	private static final int EXPONET1= 31;
-	private static final int EXPONET2= 34;
-	private static final int EXPONET3= 37;
+	private static final int EXPONENT1 = 31;
+	private static final int EXPONENT2 = 34;
+	private static final int EXPONENT3 = 37;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -35,37 +35,39 @@ public class Solution {
 			int bookLen = B.length();
 			int patternLen = S.length();
 			int cnt = 0;
-			
-			for(int i = 0; i <= bookLen - patternLen; i++) {
-				if(i == 0) {
-					for(int j = 0; j < patternLen; j++) {
-						
-						stringHash1 += hash(B.charAt(patternLen - 1 - j), power1);
-						patternHash1 += hash(S.charAt(patternLen - 1 - j), power1);
-						
-						stringHash2 += hash(B.charAt(patternLen - 1 - j), power2);
-						patternHash2 += hash(S.charAt(patternLen - 1 - j), power2);
-						
-						stringHash3 += hash(B.charAt(patternLen - 1 - j), power3);
-						patternHash3 += hash(S.charAt(patternLen - 1 - j), power3);
-						
-						if(j < patternLen - 1) {
-							power1 *= EXPONET1;
-							power2 *= EXPONET2;
-							power3 *= EXPONET3;
-						}
-					}
-				}else {
-					stringHash1 = EXPONET1 * (stringHash1 - hash(B.charAt(i - 1), power1)) 
-							+ B.charAt(i + patternLen - 1);
-					stringHash2 = EXPONET2 * (stringHash2 - hash(B.charAt(i - 1), power2)) 
-							+ B.charAt(i + patternLen - 1);
-					stringHash3 = EXPONET3 * (stringHash3 - hash(B.charAt(i - 1), power3)) 
-							+ B.charAt(i + patternLen - 1);
+
+			for(int j = 0; j < patternLen; j++) {
+
+				stringHash1 += hash(B.charAt(patternLen - 1 - j), power1);
+				patternHash1 += hash(S.charAt(patternLen - 1 - j), power1);
+
+				stringHash2 += hash(B.charAt(patternLen - 1 - j), power2);
+				patternHash2 += hash(S.charAt(patternLen - 1 - j), power2);
+
+				stringHash3 += hash(B.charAt(patternLen - 1 - j), power3);
+				patternHash3 += hash(S.charAt(patternLen - 1 - j), power3);
+
+				if(j < patternLen - 1) {
+					power1 *= EXPONENT1;
+					power2 *= EXPONENT2;
+					power3 *= EXPONENT3;
 				}
-				
+			}
+
+			if(stringHash1 == patternHash1 && stringHash2 == patternHash2 && stringHash3 == patternHash3) cnt++;
+
+			for(int i = 1; i <= bookLen - patternLen; i++) {
+
+				stringHash1 = EXPONENT1 * (stringHash1 - hash(B.charAt(i - 1), power1))
+						+ B.charAt(i + patternLen - 1);
+				stringHash2 = EXPONENT2 * (stringHash2 - hash(B.charAt(i - 1), power2))
+						+ B.charAt(i + patternLen - 1);
+				stringHash3 = EXPONENT3 * (stringHash3 - hash(B.charAt(i - 1), power3))
+						+ B.charAt(i + patternLen - 1);
+
 				if(stringHash1 == patternHash1 && stringHash2 == patternHash2 && stringHash3 == patternHash3) cnt++; 
 			}
+
 			sb.append('#').append(tc).append(' ').append(cnt).append('\n');
 		}
 		bw.write(sb.toString());
