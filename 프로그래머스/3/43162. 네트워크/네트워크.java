@@ -23,7 +23,7 @@ class Solution {
             int cur = q.poll();
             
             for(int i = 0; i < n; i++){
-                if(cur == i || vis[i] || computers[cur][i] == 0) continue;
+                if(vis[i] || computers[cur][i] == 0) continue;
                 vis[i] = true;
                 q.offer(i);
             }
