@@ -37,29 +37,20 @@ class Solution {
             return;
         }
         
-        
         //infections 복사 후 감염시키고, 다음으로 진행
-        Set<Integer> A = applyInfection(infections, 0);
-        A.addAll(infections);
-        dfs(level + 1, A);
-        
-        Set<Integer> B = applyInfection(infections, 1);
-        B.addAll(infections);
-        dfs(level + 1, B);
-        
-        Set<Integer> C = applyInfection(infections, 2);
-        C.addAll(infections);
-        dfs(level + 1, C);
+        for(int type = 0; type < 3; type++){
+            Set<Integer> next = applyInfection(infections, type);
+            next.addAll(infections);
+            dfs(level + 1, next);
+        }
     }
     
     public Set<Integer> applyInfection(Set<Integer> infections, int type){
         Set<Integer> result = new HashSet<>();
         
         Queue<Integer> q = new ArrayDeque<>();
-        boolean[] vis = new boolean[N + 1];
         for(int infection : infections){
             q.offer(infection);
-            vis[infection] = true;
         }
         
         
@@ -67,11 +58,9 @@ class Solution {
             int cur = q.poll();
             
             for(int next : graph[cur][type]){
-                if(!vis[next]){
-                    q.offer(next);
-                    vis[next] = true;
-                    result.add(next);
-                }
+                if(result.contains(next)) continue;
+                q.offer(next);
+                result.add(next);
             }
         }
         
